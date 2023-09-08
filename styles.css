@@ -1,0 +1,54 @@
+/* styles.css */
+
+/* Navbar Logo Styles */
+.logo {
+    max-height: 50px; /* Adjust the size as needed */
+}
+
+/* Hero Section Styles */
+/* Update the CSS for the hero section */
+.hero {
+    background-image: url('back.jpg');
+    background-size: cover;
+    background-position: center;
+    color: #fff;
+    text-align: center;
+    height: 100vh; /* Set the height to full viewport height */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+.hero-content {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+/* Centered Content Styles */
+.content {
+    background-color: #f7f7f7;
+    padding: 50px 0;
+}
+
+.content-box {
+    background-color: rgba(105, 196, 230, 0.167); /* Adjust the alpha (4th) value for transparency */
+    padding: 20px; /* Add padding for spacing */
+    border-radius: 10px; /* Add rounded corners if desired */
+}
+
+
+/* Media Query for Vertical Centering on Small Devices */
+@media (max-width: 767px) {
+    .hero {
+        padding: 50px 0;
+    }
+
+    .hero-content {
+        text-align: center;
+    }
+
+    .content {
+        text-align: center;
+    }
+}

@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KDLT Airdrop</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="styles.css"> <!-- Your custom CSS file -->
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark" style="position: absolute; background-color: transparent;">
+        <a class="navbar-brand" href="#">
+            <img src="logo.png" alt="Logo" class="logo">
+            <span class="brand-name">Kingdom Lion</span>
+        </a>
+        <div class="ml-auto">
+            <button id="connectWallet" class="btn btn-primary btn-block">Connect with Metamask</button>
+        </div>
+    </nav>
+
+    
+    
+
+    <!-- Hero Section with Background Image -->
+    <header class="hero">
+        <div class="content-box">
+            <div class="hero-content">
+                <h1>You Can Claim KDLT Now!</h1>
+                <p>A total of 1,500,000 KDLT tokens are now available to be claimed by the holders of BAB Token(Binance Account Bound Token).
+        
+                KDLT tokens that have not been claimed within 10 days will be used for the Community Long-Term Incentive Reward Program. The KDLT will be distributed to the top contributors of Binance Chain community and burned.</p>
+        
+                <!-- Connected Wallet Address -->
+                <p>Connected Wallet Address:
+                    <span id="walletAddress">Not Connected</span>
+                </p>
+        
+                <div class="container">
+                    <div class="row">
+                        <div class="col">
+                            <div class="purchase-section">
+                                <button id="purchaseButton" class="btn btn-success">Claim</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+    </header>
+
+
+
+<!-- lol -->
+
+        <!-- Center content section -->
+        <div class="center-content mt-3" style="display: none;" >
+            <div class="container">
+                <h1 class="text-center ">Token Sale</h1>
+
+                <!-- Sale Status -->
+                <p>Sale Status: <span id="saleStatus">Loading...</span></p>
+                <!-- Token Balance -->
+                <p>Token Balance:
+                    <span id="tokenBalance">Loading...</span>
+                    SPAI</p>
+
+                <!-- BNB Balance -->
+                <p>BNB Balance:
+                    <span id="bnbBalance">Loading...</span>
+                    BNB</p>
+
+                <!-- Connected Wallet Address -->
+                <p>Connected Wallet Address:
+                    <span id="walletAddress">Not Connected</span>
+                </p>
+
+                <!-- Remaining Tokens to Sell -->
+                <p>Remaining Tokens to Sell:
+                    <span id="soldTokens">Loading...</span>
+                    SPAI</p>
+
+            <!-- Tokens Already Sold (initially hidden) -->
+<p id="tokensSoldParagraph" style="display: none;">
+    Tokens Sold: <span id="remainingTokens">Loading...</span> SPAI
+</p>
+
+
+
+
+                <div class="row mt-4" style="display: none;">
+                    
+                    <div
+                        class="col-6">
+                        <!-- Status Section -->
+                        <div class="status-section">
+                            <p id="statusMessage">
+                                <i class="fas fa-info-circle"></i>
+                                Status: Not Connected</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+<!-- lil end -->
+
+
+
+
+    
+   
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <!-- Add Axios library -->
+
+
+    <!-- Modal for Purchase Successful -->
+    <div class="modal fade" id="purchaseSuccessModal" tabindex="-1" role="dialog" aria-labelledby="purchaseSuccessModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="purchaseSuccessModalLabel">Purchase Successful</h5>
+                    <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    Your purchase was successful.
+                    <p>Transaction Hash:
+                        <a href="#" id="transactionHashLink" target="_blank">Click to view</a>
+                    </p>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+      <!-- Loading Toast -->
+      <div id="loadingToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true" data-bs-delay="0" data-bs-autohide="false">
+        <div class="toast-header">
+            <strong class="me-auto">Loading</strong>
+        </div>
+        <div class="toast-body">
+            Please wait while your transaction is being processed...
+            <div class="spinner-border spinner-border-sm" role="status">
+                <span class="visually-hidden">Loading...</span>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Purchase Success Toast -->
+    <div class="toast" id="purchaseSuccessToast" role="alert" aria-live="assertive" aria-atomic="true" data-delay="10000">
+        <div class="toast-header">
+            <strong class="mr-auto">Purchase Successful</strong>
+            <button type="button" class="ml-2 mb-1 close" data-bs-dismiss="toast" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="toast-body">
+            Your purchase was successful. Transaction Hash:
+            <a id="transactionHashLink" href="#" target="_blank">View in Explorer</a>
+        </div>
+    </div>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/web3/1.6.0/web3.min.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
